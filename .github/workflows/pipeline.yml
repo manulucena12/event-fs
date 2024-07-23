@@ -16,7 +16,7 @@ jobs:
           with: 
             node-version: 20.11.1
         - name: Installing depedencies
-          run: npm ci
+          run: npm install
         - name: Checking lint with prettier
           run: npm run lint
         - name: Typescript build
