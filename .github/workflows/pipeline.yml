@@ -16,8 +16,11 @@ jobs:
           with: 
             node-version: 20.11.1
         - name: Installing depedencies
-          run: npm install
+          working-directory: backend
+          run: npm ci
         - name: Checking lint with prettier
+          working-directory: backend
           run: npm run lint
         - name: Typescript build
+          working-directory: backend
           run: npm run build
