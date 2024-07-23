@@ -1,0 +1,23 @@
+name: Pipeline
+on: 
+    push:
+        branches: [main]
+
+jobs: 
+    CI_Backend:
+        runs-on: ubuntu-latest
+        steps: 
+        - name: Checking out
+          uses: actions/checkout@v4
+          with: 
+            fetch-depth: 0
+        - name: Seting up node
+          uses: actions/setup-node@v4
+          with: 
+            node-version: 20.11.1
+        - name: Installing depedencies
+          run: npm ci
+        - name: Checking lint with prettier
+          run: npm run lint
+        - name: Typescript build
+          run: npm run build
