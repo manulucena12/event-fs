@@ -14,10 +14,10 @@ if (!MONGO_DB_URI && !MONGO_DB_URI_TEST && !MONGO_DB_URI_DEV) {
 }
 const uri: string =
   NODE_ENV === "test"
-    ? MONGO_DB_URI_TEST
+    ? MONGO_DB_URI_TEST!
     : NODE_ENV === "dev"
-      ? MONGO_DB_URI_DEV
-      : MONGO_DB_URI;
+      ? MONGO_DB_URI_DEV!
+      : MONGO_DB_URI!;
 
 app.use(express.json());
 
