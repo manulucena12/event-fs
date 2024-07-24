@@ -1,11 +1,12 @@
 import { Request, Response } from "express-serve-static-core";
 import {
+  BookEventRB,
   CreateEventResB,
   DeleteEventRB,
   GetEventsRB,
 } from "../types/responses";
 import { Events } from "../schemas/events";
-import { Event } from "../types/events";
+import { Event, Ticket } from "../types/events";
 
 export const getEvents = async (req: Request, res: Response<GetEventsRB>) => {
   try {
@@ -69,6 +70,54 @@ export const deleteEvent = async (
     return res.status(200).json("Deleted");
   } catch (error) {
     return res.status(500).json("Internal server error");
+  }
+};
+
+export const bookASite = async (
+  req: Request<
+    NonNullable<unknown>,
+    NonNullable<unknown>,
+    { id: string; type: string; username: string }
+  >,
+  res: Response<BookEventRB>,
+) => {
+  const { id, type, username } = req.body;
+  const event = await Events.findById(id);
+  if (!event) {
+    return res.status(400).json("This event does not exist");
+  }
+  const vip = event.sites.find((s) => s.type === "vip");
+  const general = event.sites.find((s) => s.type === "general");
+  const gold = event.sites.find((s) => s.type === "gold");
+  const isBookedVip = vip?.persons.some((p) => p.username === username);
+  const isBookedGold = gold?.persons.some((p) => p.username === username);
+  const isBookedGeneral = general?.persons.some((p) => p.username === username);
+  if (isBookedGeneral || isBookedGold || isBookedVip) {
+    return res.status(400).json("You have already booked a ticket");
+  }
+  const siteToBook = event.sites.find((s) => s.type === type);
+  if (siteToBook?.available === 0) {
+    return res.status(400).json("Sold out");
+  }
+  event.sites = event.sites.map((s) =>
+    s.type === type
+      ? {
+          ...s,
+          available: s.available - 1,
+          persons: [...s.persons, { username }],
+        }
+      : s,
+  );
+  const ticket: Ticket = {
+    username,
+    type,
+    artist: event.artist,
+  };
+  try {
+    await event.save();
+    return res.status(200).json(ticket);
+  } catch (error) {
     console.log(error);
+    return res.status(500).json("Internal server error");
   }
 };

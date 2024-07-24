@@ -17,3 +17,9 @@ export interface Person {
   readonly id?: string;
   username: string;
 }
+
+export interface Ticket {
+  username: string;
+  artist: string;
+  type: string;
+}
