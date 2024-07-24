@@ -15,14 +15,11 @@ const uri = NODE_ENV === "test"
     : NODE_ENV === "dev"
         ? MONGO_DB_URI_DEV
         : MONGO_DB_URI;
-exports.app.use(express_1.default.json());
-exports.app.use("/api/events", events_1.eventsRouter);
 mongoose_1.default.connect(uri).then(() => {
     console.log(`Mongo DB connected successfully on mode ${NODE_ENV}`);
 });
-exports.app.get("/", (req, res) => {
-    res.send("Hello World");
-});
+exports.app.use(express_1.default.json());
+exports.app.use("/api/events", events_1.eventsRouter);
 exports.app.listen(3002, () => {
     console.log(`Server running on port http://localhost:3002`);
 });

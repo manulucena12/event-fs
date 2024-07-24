@@ -14,11 +14,12 @@ const uri =
       : MONGO_DB_URI;
 
 app.use(express.json());
-app.use("/api/events", eventsRouter);
 
 mongoose.connect(uri).then(() => {
   console.log(`Mongo DB connected successfully on mode ${NODE_ENV}`);
 });
+
+app.use("/api/events", eventsRouter);
 
 app.listen(3002, () => {
   console.log(`Server running on port http://localhost:3002`);
