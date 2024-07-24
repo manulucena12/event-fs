@@ -7,3 +7,8 @@ export type CreateEventResB =
   | Event
   | "Internal server error"
   | "Type error";
+
+export type DeleteEventRB =
+  | "Deleted"
+  | "Internal server error"
+  | "This event does not exist";
