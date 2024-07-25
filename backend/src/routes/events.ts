@@ -1,6 +1,7 @@
 import express from "express";
 import {
   bookASite,
+  cancelTicket,
   createEvents,
   deleteEvent,
   getEvents,
@@ -14,4 +15,6 @@ eventsRouter.post("/", createEvents);
 
 eventsRouter.delete("/", deleteEvent);
 
-eventsRouter.put("/", bookASite);
+eventsRouter.put("/book", bookASite);
+
+eventsRouter.put("/cancel", cancelTicket);

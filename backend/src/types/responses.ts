@@ -19,3 +19,10 @@ export type BookEventRB =
   | Ticket
   | "Sold out"
   | "You have already booked a ticket";
+
+export type CancelTicketRB =
+  | "This event does not exist"
+  | "Missing parameters"
+  | "Ticket canceled successfully"
+  | "Internal server error"
+  | "User not listed";

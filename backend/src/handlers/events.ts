@@ -1,6 +1,7 @@
 import { Request, Response } from "express-serve-static-core";
 import {
   BookEventRB,
+  CancelTicketRB,
   CreateEventResB,
   DeleteEventRB,
   GetEventsRB,
@@ -112,12 +113,47 @@ export const bookASite = async (
     username,
     type,
     artist: event.artist,
+    eventId: event.id,
   };
   try {
     await event.save();
     return res.status(200).json(ticket);
   } catch (error) {
     console.log(error);
+    return res.status(500).json("Internal server error");
+  }
+};
+
+export const cancelTicket = async (
+  req: Request<NonNullable<unknown>, NonNullable<unknown>, Ticket>,
+  res: Response<CancelTicketRB>,
+) => {
+  const { username, type, eventId } = req.body;
+  if (!username || !type || !eventId) {
+    return res.status(400).json("Missing parameters");
+  }
+  const event = await Events.findById(eventId);
+  if (!event) {
+    return res.status(400).json("This event does not exist");
+  }
+  const site = event.sites.find((s) => s.type === type);
+  const exist = site?.persons.some((p) => p.username === username);
+  if (!exist) {
+    return res.status(400).json("User not listed");
+  }
+  event.sites = event.sites.map((s) =>
+    s.type === type
+      ? {
+          ...s,
+          available: s.available + 1,
+          persons: s.persons.filter((p) => p.username !== username),
+        }
+      : s,
+  );
+  try {
+    await event.save();
+    return res.status(200).json("Ticket canceled successfully");
+  } catch {
     return res.status(500).json("Internal server error");
   }
 };
