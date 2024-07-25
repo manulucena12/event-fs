@@ -25,6 +25,7 @@ jobs:
           working-directory: backend
           run: npm run build
         - name: Run tests
+          working-directory: backend
           env:
             MONGO_DB_URI_TEST: ${{ secrets.MONGO_DB_URI_TEST }}
             MY_SECRET_PASSWORD: ${{ secrets.MY_SECRET_PASSWORD }}
