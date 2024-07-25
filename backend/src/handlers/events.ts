@@ -8,6 +8,7 @@ import {
 } from "../types/responses";
 import { Events } from "../schemas/events";
 import { Event, Ticket } from "../types/events";
+import { User } from "../schemas/users";
 
 export const getEvents = async (req: Request, res: Response<GetEventsRB>) => {
   try {
@@ -84,8 +85,12 @@ export const bookASite = async (
 ) => {
   const { id, type, username } = req.body;
   const event = await Events.findById(id);
+  const user = await User.findOne({ username });
   if (!event) {
     return res.status(400).json("This event does not exist");
+  }
+  if (!user) {
+    return res.status(400).json("This user does not exist");
   }
   const vip = event.sites.find((s) => s.type === "vip");
   const general = event.sites.find((s) => s.type === "general");
@@ -114,9 +119,13 @@ export const bookASite = async (
     type,
     artist: event.artist,
     eventId: event.id,
+    place: event.city,
+    date: event.date,
   };
+  user.tickets = [...user.tickets, ticket];
   try {
     await event.save();
+    await user.save();
     return res.status(200).json(ticket);
   } catch (error) {
     console.log(error);
@@ -136,6 +145,10 @@ export const cancelTicket = async (
   if (!event) {
     return res.status(400).json("This event does not exist");
   }
+  const user = await User.findOne({ username });
+  if (!user) {
+    return res.status(400).json("This user does not exist");
+  }
   const site = event.sites.find((s) => s.type === type);
   const exist = site?.persons.some((p) => p.username === username);
   if (!exist) {
@@ -150,7 +163,9 @@ export const cancelTicket = async (
         }
       : s,
   );
+  user.tickets = user.tickets.filter((t) => t.eventId !== eventId);
   try {
+    await user.save();
     await event.save();
     return res.status(200).json("Ticket canceled successfully");
   } catch {

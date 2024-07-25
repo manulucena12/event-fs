@@ -23,4 +23,6 @@ export interface Ticket {
   artist: string;
   type: string;
   eventId: string;
+  place: string;
+  date: string;
 }
