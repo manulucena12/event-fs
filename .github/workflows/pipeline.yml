@@ -24,6 +24,9 @@ jobs:
         - name: Typescript build
           working-directory: backend
           run: npm run build
+        - name: Cleaning up build for test
+          working-directory: backend
+          run: rm -rf build
         - name: Run tests
           working-directory: backend
           env:
