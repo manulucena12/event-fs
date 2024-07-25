@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import "dotenv/config";
 import { eventsRouter } from "./routes/events";
 import { userRouter } from "./routes/users";
+import { loginRouter } from "./routes/login";
 
 export const app = express();
 const { MONGO_DB_URI, MONGO_DB_URI_TEST, MONGO_DB_URI_DEV, NODE_ENV } =
@@ -33,6 +34,7 @@ mongoose
 
 app.use("/api/events", eventsRouter);
 app.use("/api/users", userRouter);
+app.use("/api/login", loginRouter);
 
 app.listen(3002, () => {
   console.log(`Server running on port http://localhost:3002`);

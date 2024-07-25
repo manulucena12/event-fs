@@ -7,3 +7,8 @@ export interface UserType {
   readonly id?: string;
   password?: string;
 }
+
+export interface Token {
+  username: string;
+  token: string;
+}

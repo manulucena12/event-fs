@@ -1,5 +1,5 @@
 import { Event, Ticket } from "./events";
-import { UserType } from "./users";
+import { Token, UserType } from "./users";
 
 export type GetEventsRB = Event[] | "Internal server error";
 
@@ -42,3 +42,9 @@ export type DeleteUserRB =
   | "Malformatted parameters"
   | "User eliminated"
   | "Internal server error";
+
+export type LoginRB =
+  | "Internal server error"
+  | "Missing parameters"
+  | Token
+  | "Username or/and password incorrect";
