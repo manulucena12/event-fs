@@ -24,3 +24,8 @@ jobs:
         - name: Typescript build
           working-directory: backend
           run: npm run build
+        - name: Run tests
+          env:
+            MONGO_DB_URI_TEST: ${{ secrets.MONGO_DB_URI_TEST }}
+            MY_SECRET_PASSWORD: ${{ secrets.MY_SECRET_PASSWORD }}
+          run: npm run test

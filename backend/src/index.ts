@@ -36,6 +36,6 @@ app.use("/api/events", eventsRouter);
 app.use("/api/users", userRouter);
 app.use("/api/login", loginRouter);
 
-app.listen(3002, () => {
+export const server = app.listen(3002, () => {
   console.log(`Server running on port http://localhost:3002`);
 });
