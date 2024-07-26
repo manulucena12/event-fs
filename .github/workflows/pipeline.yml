@@ -33,3 +33,23 @@ jobs:
             MONGO_DB_URI_TEST: ${{ secrets.MONGO_DB_URI_TEST }}
             MY_SECRET_PASSWORD: ${{ secrets.MY_SECRET_PASSWORD }}
           run: npm run test
+    CI_Frontend:
+      runs-on: ubuntu-latest
+      steps: 
+      - name: Checking out
+        uses: actions/checkout@v4
+        with: 
+          fetch-depth: 0
+      - name: Seting up node
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 20.11.1
+      - name: Installing depedencies
+        working-directory: client
+        run: npm ci
+      - name: Checking lint with prettier
+        working-directory: client
+        run: npm run lint
+      - name: Vite build
+        working-directory: client
+        run: npm run build

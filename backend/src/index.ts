@@ -4,6 +4,7 @@ import "dotenv/config";
 import { eventsRouter } from "./routes/events";
 import { userRouter } from "./routes/users";
 import { loginRouter } from "./routes/login";
+import cors from "cors";
 
 export const app = express();
 const { MONGO_DB_URI, MONGO_DB_URI_TEST, MONGO_DB_URI_DEV, NODE_ENV } =
@@ -22,6 +23,7 @@ const uri: string =
       : MONGO_DB_URI!;
 
 app.use(express.json());
+app.use(cors());
 
 mongoose
   .connect(uri)
