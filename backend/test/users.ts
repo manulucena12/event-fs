@@ -31,42 +31,42 @@ export const testingUsers = () => {
         });
     });
     it("Creating a user without enough parameters causes error", async () => {
-        const newUser = {
-          username: "user-example2"
-        };
-        await api
-          .post("/api/users")
-          .send(newUser)
-          .expect(400)
-          .then((response) => {
-            expect(response.body === "Missing parameters").toBeTruthy();
-          });
-      });
-      it("Deleting with wrong parameters causes error", async () => {
-        const newUser = {
-          username: "user-example2",
-          password: "password-example3",
-        };
-        await api
-          .delete("/api/users")
-          .send(newUser)
-          .expect(400)
-          .then((response) => {
-            expect(response.body === "Malformatted parameters").toBeTruthy();
-          });
-      });
-      it("Deleting a user works", async () => {
-        const newUser = {
-          username: "user-example2",
-          password: "password-example2",
-        };
-        await api
-          .delete("/api/users")
-          .send(newUser)
-          .expect(200)
-          .then((response) => {
-            expect(response.body === "User eliminated").toBeTruthy();
-          });
-      });
+      const newUser = {
+        username: "user-example2",
+      };
+      await api
+        .post("/api/users")
+        .send(newUser)
+        .expect(400)
+        .then((response) => {
+          expect(response.body === "Missing parameters").toBeTruthy();
+        });
+    });
+    it("Deleting with wrong parameters causes error", async () => {
+      const newUser = {
+        username: "user-example2",
+        password: "password-example3",
+      };
+      await api
+        .delete("/api/users")
+        .send(newUser)
+        .expect(400)
+        .then((response) => {
+          expect(response.body === "Malformatted parameters").toBeTruthy();
+        });
+    });
+    it("Deleting a user works", async () => {
+      const newUser = {
+        username: "user-example2",
+        password: "password-example2",
+      };
+      await api
+        .delete("/api/users")
+        .send(newUser)
+        .expect(200)
+        .then((response) => {
+          expect(response.body === "User eliminated").toBeTruthy();
+        });
+    });
   });
 };
