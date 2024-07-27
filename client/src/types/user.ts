@@ -3,7 +3,21 @@ export interface UserToLog {
   password: string;
 }
 
-export interface Token {
+export interface UserToken {
   username: string;
   token: string;
+}
+
+export interface CreateUser {
+  username: string;
+  tickets: Ticket[];
+}
+
+export interface Ticket {
+  username: string;
+  artist: string;
+  type: string;
+  eventId: string;
+  place: string;
+  date: string;
 }

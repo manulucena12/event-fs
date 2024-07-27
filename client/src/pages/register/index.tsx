@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { handleLogin } from "../../utils/user";
+import { handleSigin } from "../../utils/user";
 import { NotiPopUp } from "../../components/Notification";
 import { Link } from "react-router-dom";
 
-export const LoginPage: React.FC = () => {
+export const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,14 +26,14 @@ export const LoginPage: React.FC = () => {
         </svg>
         <p className="text-4xl font-bold">FastTickets</p>
       </div>
-      <article className="bg-white mx-auto flex flex-col items-center text-center p-9 space-y-10 h-[360px] rounded shadow mt-[100px]">
+      <article className="bg-white mx-auto flex flex-col items-center text-center p-9 space-y-10 h-[360px] w-[360px] rounded shadow mt-[100px]">
         <div>
-          <p className="text-3xl font-bold mt-[-5px] mb-[-5px]">Login</p>
+          <p className="text-3xl font-bold mt-[-5px] mb-[-5px]">Sign in</p>
         </div>
         <form
           className="space-y-3"
           onSubmit={(event) => {
-            handleLogin(event, username, password);
+            handleSigin(event, username, password);
           }}
         >
           <p className="text-lg">Username</p>
@@ -51,13 +51,16 @@ export const LoginPage: React.FC = () => {
             required
             onChange={(event) => setPassword(event.target.value)}
           />
-          <button className="mt-4 p-2 bg-slate-100 rounded transition-colors hover:bg-sky-500 hover:text-white">
-            Submit
+          <button
+            className="p-2 bg-slate-100 rounded transition-colors hover:bg-sky-500 hover:text-white"
+            style={{ marginTop: "30px" }}
+          >
+            Create account
           </button>
+          <Link className="block hover:text-sky-500" to={"/"}>
+            Login
+          </Link>
         </form>
-        <Link className="hover:text-sky-500" to="/register">
-          Don't you have an account? Click here to create one!
-        </Link>
       </article>
       <footer className="mt-[30px]">
         <NotiPopUp />
