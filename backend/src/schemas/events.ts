@@ -16,6 +16,7 @@ const eventSchema = new mongoose.Schema<Event>({
   artist: { type: String, required: true },
   date: { type: String, required: true },
   city: { type: String, required: true },
+  img: { type: String, required: true },
   sites: [{ type: siteSchema, required: true }],
 });
 

@@ -26,6 +26,7 @@ export const testingEvents = () => {
         artist: "The Weeknd",
         city: "Seville",
         date: "July 12, 2025",
+        img: "https://www.kissfm.es/wp-content/uploads/2021/08/226753219_380847860078288_1941988628228492225_n.jpg",
         sites: [
           {
             type: "vip",

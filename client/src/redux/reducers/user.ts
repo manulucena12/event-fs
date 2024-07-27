@@ -3,7 +3,7 @@ import { UserToken } from "../../types/user";
 
 export const userSlice = createSlice({
   name: "User",
-  initialState: {} as UserToken,
+  initialState: null as UserToken | null,
   reducers: {
     setUser(state, action: PayloadAction<UserToken>) {
       return action.payload;

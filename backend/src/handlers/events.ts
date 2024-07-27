@@ -23,8 +23,8 @@ export const createEvents = async (
   req: Request<NonNullable<unknown>, NonNullable<unknown>, Event>,
   res: Response<CreateEventResB>,
 ) => {
-  const { artist, date, sites, city } = req.body;
-  if (!artist || !date || !sites || !city) {
+  const { artist, date, sites, city, img } = req.body;
+  if (!artist || !date || !sites || !city || !img) {
     return res.status(400).json("Missing parameters");
   }
   if (typeof artist !== "string") {
@@ -45,6 +45,7 @@ export const createEvents = async (
       date,
       sites,
       city,
+      img,
     });
     const response: Event = await newEvent.save();
     return res.status(201).json(response);

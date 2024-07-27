@@ -4,6 +4,7 @@ export interface Event {
   date: string;
   sites: Site[];
   city: string;
+  img: string;
 }
 
 export interface Site {
