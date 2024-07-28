@@ -8,6 +8,8 @@ import { EventsPage } from "./pages/events";
 import { AppDispatch, RootState } from "./redux/store";
 import { NavBar } from "./components/Navbar";
 import { getEventsAction } from "./redux/actions/events";
+import { SingleEventPage } from "./pages/single";
+import { UserPage } from "./pages/user";
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
@@ -30,6 +32,8 @@ function App() {
             path="/register"
             element={user ? <EventsPage /> : <RegisterPage />}
           />
+          <Route path="/event/:eventId" element={<SingleEventPage />} />
+          <Route path="/user" element={<UserPage />} />
         </Routes>
       </BrowserRouter>
     </>

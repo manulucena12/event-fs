@@ -18,3 +18,9 @@ export interface Person {
   readonly id?: string;
   username: string;
 }
+
+export interface BookSite {
+  username: string;
+  type: string;
+  id: string;
+}

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserToken } from "../../types/user";
+import { Ticket, UserToken } from "../../types/user";
 
 export const userSlice = createSlice({
   name: "User",
@@ -8,7 +8,10 @@ export const userSlice = createSlice({
     setUser(state, action: PayloadAction<UserToken>) {
       return action.payload;
     },
+    addTicket(state, action: PayloadAction<Ticket>) {
+      state?.tickets.push(action.payload);
+    },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, addTicket } = userSlice.actions;

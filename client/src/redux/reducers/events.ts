@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Event } from "../../types/events";
-import { Ticket } from "../../types/user";
+import { BookSite, Event } from "../../types/events";
 
 export const eventsSlice = createSlice({
   name: "Events",
@@ -9,7 +8,7 @@ export const eventsSlice = createSlice({
     setEvents(state, action: PayloadAction<Event[]>) {
       return action.payload;
     },
-    bookASite(state, action: PayloadAction<Ticket>) {
+    bookASite(state, action: PayloadAction<BookSite>) {
       return state.map((e) =>
         e.id === action.payload.eventId
           ? {
@@ -23,7 +22,7 @@ export const eventsSlice = createSlice({
           : e,
       );
     },
-    cancelASite(state, action: PayloadAction<Ticket>) {
+    cancelASite(state, action: PayloadAction<BookSite>) {
       return state.map((e) =>
         e.id === action.payload.eventId
           ? {

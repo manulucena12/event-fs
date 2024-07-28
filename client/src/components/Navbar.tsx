@@ -14,7 +14,7 @@ export const NavBar: React.FC = () => {
           </Link>
         </div>
         <div>
-          <Link className="hover:text-sky-500" to={"/:id"}>
+          <Link className="hover:text-sky-500" to={"/user"}>
             My tickets
           </Link>
         </div>
@@ -99,7 +99,7 @@ export const NavBar: React.FC = () => {
             </Link>
           </div>
           <div>
-            <Link className="hover:text-sky-500" to={"/:id"}>
+            <Link className="hover:text-sky-500" to={"/user"}>
               My tickets
             </Link>
           </div>
