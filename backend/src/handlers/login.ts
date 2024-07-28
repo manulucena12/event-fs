@@ -29,6 +29,7 @@ export const loginHandler = async (
   const data: Token = {
     username,
     token,
+    tickets: user.tickets,
   };
   try {
     return res.status(200).json(data);

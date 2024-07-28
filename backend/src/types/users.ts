@@ -11,4 +11,5 @@ export interface UserType {
 export interface Token {
   username: string;
   token: string;
+  tickets: Ticket[];
 }
