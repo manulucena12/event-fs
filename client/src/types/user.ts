@@ -6,6 +6,7 @@ export interface UserToLog {
 export interface UserToken {
   username: string;
   token: string;
+  tickets: Ticket[];
 }
 
 export interface CreateUser {

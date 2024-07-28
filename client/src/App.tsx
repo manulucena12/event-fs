@@ -5,13 +5,15 @@ import { setUser } from "./redux/reducers/user";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RegisterPage } from "./pages/register";
 import { EventsPage } from "./pages/events";
-import { RootState } from "./redux/store";
+import { AppDispatch, RootState } from "./redux/store";
 import { NavBar } from "./components/Navbar";
+import { getEventsAction } from "./redux/actions/events";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   useEffect(() => {
+    dispatch(getEventsAction());
     const user = window.localStorage.getItem("User");
     if (user) {
       dispatch(setUser(JSON.parse(user)));
