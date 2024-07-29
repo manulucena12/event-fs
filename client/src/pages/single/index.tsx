@@ -25,6 +25,7 @@ export const SingleEventPage: React.FC = () => {
               Available: {s.available} tickets{" "}
             </p>
             <button
+              name="reservation"
               onClick={(event) =>
                 handleBooking(event, {
                   // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain

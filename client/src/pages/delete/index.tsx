@@ -33,6 +33,7 @@ export const DeleteUserPage: React.FC = () => {
           <p className="text-lg">Password</p>
           <input
             className="block bg-slate-100 rounded text-center mt-3 focus:outline-none"
+            name="password"
             type="password"
             placeholder="mysecrepassword"
             required

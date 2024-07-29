@@ -71,7 +71,7 @@ export const NavBar: React.FC = () => {
             />
           </svg>
           FastTickets
-          <button onClick={() => setShow(!show)}>
+          <button name="show" onClick={() => setShow(!show)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

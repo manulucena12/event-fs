@@ -39,6 +39,7 @@ export const LoginPage: React.FC = () => {
           <p className="text-lg">Username</p>
           <input
             className="block bg-slate-100 rounded text-center mb-3 mt-3 focus:shadow-2xl focus:outline-none"
+            name="username"
             placeholder="Jane Smith"
             required
             onChange={(event) => setUsername(event.target.value)}
@@ -46,6 +47,7 @@ export const LoginPage: React.FC = () => {
           <p className="text-lg">Password</p>
           <input
             className="block bg-slate-100 rounded text-center mt-3 focus:outline-none"
+            name="password"
             type="password"
             placeholder="mysecrepassword"
             required
