@@ -36,3 +36,18 @@ export const signinService = async (
     }
   }
 };
+
+export const deleteUserservice = async (user: UserToLog): Promise<string> => {
+  try {
+    const res = await axios.delete("https://event-fs.onrender.com/api/users", {
+      data: user,
+    });
+    return res.data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      return error.response.data;
+    } else {
+      throw new Error();
+    }
+  }
+};

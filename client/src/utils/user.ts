@@ -1,6 +1,8 @@
 import { AppDispatch, store } from "../redux/store";
 import { UserToLog } from "../types/user";
 import { loginAction, siginAction } from "../redux/actions/user";
+import { deleteUserservice } from "../services/user";
+import { setNotification } from "../redux/reducers/notification";
 
 export const handleLogin = async (
   event: React.SyntheticEvent,
@@ -28,4 +30,16 @@ export const handleSigin = async (
     password,
   };
   await dispatch(siginAction(userToLog));
+};
+
+export const handleDelete = async (
+  event: React.SyntheticEvent,
+  user: UserToLog,
+) => {
+  event.preventDefault();
+  const dispatch: AppDispatch = store.dispatch;
+  const res = await deleteUserservice(user);
+  window.localStorage.clear();
+  window.location.reload();
+  dispatch(setNotification(res));
 };

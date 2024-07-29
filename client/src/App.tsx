@@ -10,6 +10,7 @@ import { NavBar } from "./components/Navbar";
 import { getEventsAction } from "./redux/actions/events";
 import { SingleEventPage } from "./pages/single";
 import { UserPage } from "./pages/user";
+import { DeleteUserPage } from "./pages/delete";
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
@@ -34,6 +35,10 @@ function App() {
           />
           <Route path="/event/:eventId" element={<SingleEventPage />} />
           <Route path="/user" element={<UserPage />} />
+          <Route
+            path="/eliminate"
+            element={user ? <DeleteUserPage /> : <LoginPage />}
+          />
         </Routes>
       </BrowserRouter>
     </>
