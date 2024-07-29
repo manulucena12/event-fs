@@ -27,3 +27,18 @@ export const bookASiteService = async (
     throw new Error();
   }
 };
+
+export const cancelTicketService = async (ticket: Ticket): Promise<string> => {
+  try {
+    const res = await axios.put(
+      "https://event-fs.onrender.com/api/events/cancel",
+      ticket,
+    );
+    return res.data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      return error.response.data;
+    }
+    throw new Error();
+  }
+};

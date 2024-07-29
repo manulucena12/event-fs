@@ -11,7 +11,14 @@ export const userSlice = createSlice({
     addTicket(state, action: PayloadAction<Ticket>) {
       state?.tickets.push(action.payload);
     },
+    cancelTicket(state, action: PayloadAction<Ticket>) {
+      if (state && state.tickets) {
+        state.tickets = state.tickets.filter(
+          (t) => t.eventId !== action.payload.eventId,
+        );
+      }
+    },
   },
 });
 
-export const { setUser, addTicket } = userSlice.actions;
+export const { setUser, addTicket, cancelTicket } = userSlice.actions;

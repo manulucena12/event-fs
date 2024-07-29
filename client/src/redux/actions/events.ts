@@ -1,8 +1,13 @@
-import { bookASiteService, getEventsService } from "../../services/events";
+import {
+  bookASiteService,
+  cancelTicketService,
+  getEventsService,
+} from "../../services/events";
 import { BookSite } from "../../types/events";
-import { bookASite, setEvents } from "../reducers/events";
+import { Ticket } from "../../types/user";
+import { bookASite, cancelASite, setEvents } from "../reducers/events";
 import { setNotification } from "../reducers/notification";
-import { addTicket } from "../reducers/user";
+import { addTicket, cancelTicket } from "../reducers/user";
 import { AppDispatch } from "../store";
 
 export const getEventsAction = () => {
@@ -35,5 +40,22 @@ export const bookASiteAction = (book: BookSite) => {
       return dispatch(bookASite(reservation));
     }
     return dispatch(setNotification(reservation));
+  };
+};
+
+export const cancelTicketAction = (ticket: Ticket) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const response = await cancelTicketService(ticket);
+      dispatch(setNotification(response));
+      dispatch(cancelTicket(ticket));
+      dispatch(cancelASite(ticket));
+    } catch {
+      dispatch(
+        setNotification(
+          "We could not have proceed with your request, please, try again later",
+        ),
+      );
+    }
   };
 };

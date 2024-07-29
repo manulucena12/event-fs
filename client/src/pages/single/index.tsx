@@ -16,8 +16,8 @@ export const SingleEventPage: React.FC = () => {
         Book a ticket and enjoy listening {eventSingle?.artist} in live!
       </p>
       <div className="grid lg:max-w-screen-lg justify-center items-center mx-auto space-y-6">
-        {eventSingle?.sites.map((s) => (
-          <article className="bg-white w-[600px] mt-[40px] rounded">
+        {eventSingle?.sites.map((s, index) => (
+          <article key={index} className="bg-white w-[600px] mt-[40px] rounded">
             <p className="block text-lg font-bold ml-4">Site: {s.type}</p>
             <hr></hr>
             <p className="block text-lg ml-4">Price: {s.price}$</p>
