@@ -13,7 +13,7 @@ export const UserPage: React.FC = () => {
       <p className="text-xl text-center mt-5">
         You have {user?.tickets.length} tickets{" "}
       </p>
-      <div className="grid grid-cols-2 gap-4 max-w-screen-lg mx-auto items-center justify-center">
+      <div className="grid lg:grid-cols-2 gap-4 lg:max-w-screen-lg mx-auto items-center md:max-w-screen-md justify-center md:grid-cols-1 lg:space-x-1">
         {user?.tickets.map((t) => (
           <article
             key={t.eventId}
